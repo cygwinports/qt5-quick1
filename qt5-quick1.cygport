@@ -43,11 +43,15 @@ qt5_quick1_tools_CONTENTS="
 qt5_quick1_examples_CATEGORY="X11"
 qt5_quick1_examples_CONTENTS="usr/lib/qt5/examples/declarative/"
 
+src_compile() {
+	cd ${B}
+	cygqmake5 ${S}
+	cygmake
+}
+
 src_install() {
 	cd ${B}
 	qt5_qmake_install
-
-	rm ${D}/usr/lib/*.la
 
 	for x in ${D}/usr/lib/qt5/bin/*.exe
 	do
