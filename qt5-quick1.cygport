@@ -1,0 +1,57 @@
+inherit qt5-qmake
+
+NAME="qt5-quick1"
+VERSION=5.1.0
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Qt C++ application framework (QML1 library)"
+DESCRIPTION="Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+HOMEPAGE="http://qt-project.org/"
+SRC_URI="http://download.qt-project.org/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtquick1-opensource-src-${VERSION}.tar.xz"
+SRC_DIR="qtquick1-opensource-src-${VERSION}"
+PATCH_URI="5.1.0-cygwin-dlopen.patch"
+
+# yes, the naming of these components is confusing. qtquick1 provides
+# Qt5Declarative (aka QML1, carried over from qt4), and qtdeclarative provides
+# Qt5Qml and Qt5Quick (aka QML2).
+PKG_NAMES="libQt5Declarative5 libQt5Declarative-devel ${NAME}-tools ${NAME}-examples"
+libQt5Declarative5_CONTENTS="
+	usr/bin/cygQt5Declarative-5.dll
+	usr/lib/qt5/imports/Qt/
+	usr/lib/qt5/imports/builtins.qmltypes
+	usr/lib/qt5/plugins/qml1tooling/
+"
+libQt5Declarative_devel_CONTENTS="
+	usr/include/qt5/QtDeclarative/
+	usr/lib/cmake/Qt5Declarative/
+	usr/lib/libQt5Declarative.*
+	usr/lib/pkgconfig/Qt5Declarative.pc
+	usr/lib/qt5/mkspecs/modules/qt_lib_declarative.pri
+	usr/lib/qt5/plugins/designer/cygqdeclarativeview.dll
+"
+qt5_quick1_tools_CATEGORY="X11"
+qt5_quick1_tools_CONTENTS="
+	usr/bin/qml1plugindump-qt5
+	usr/bin/qmlviewer-qt5
+	usr/lib/qt5/bin/qml1plugindump.exe
+	usr/lib/qt5/bin/qmlviewer.exe
+"
+qt5_quick1_examples_CATEGORY="X11"
+qt5_quick1_examples_CONTENTS="usr/lib/qt5/examples/declarative/"
+
+src_install() {
+	cd ${B}
+	qt5_qmake_install
+
+	rm ${D}/usr/lib/*.la
+
+	for x in ${D}/usr/lib/qt5/bin/*.exe
+	do
+		xname=$(basename $x .exe)
+		dosym ../lib/qt5/bin/${xname}.exe /usr/bin/${xname}-qt5
+	done
+}
