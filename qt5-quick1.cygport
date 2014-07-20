@@ -1,7 +1,7 @@
 inherit qt5-qmake
 
 NAME="qt5-quick1"
-VERSION=5.1.0
+VERSION=5.2.1
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="Qt C++ application framework (QML1 library)"
@@ -31,6 +31,7 @@ libQt5Declarative_devel_CONTENTS="
 	usr/lib/libQt5Declarative.*
 	usr/lib/pkgconfig/Qt5Declarative.pc
 	usr/lib/qt5/mkspecs/modules/qt_lib_declarative.pri
+	usr/lib/qt5/mkspecs/modules/qt_lib_declarative_private.pri
 	usr/lib/qt5/plugins/designer/cygqdeclarativeview.dll
 "
 qt5_quick1_tools_CATEGORY="X11"
