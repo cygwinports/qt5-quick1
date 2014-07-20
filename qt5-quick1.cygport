@@ -24,6 +24,7 @@ libQt5Declarative5_CONTENTS="
 	usr/lib/qt5/imports/Qt/
 	usr/lib/qt5/imports/builtins.qmltypes
 	usr/lib/qt5/plugins/qml1tooling/
+	usr/share/doc/
 "
 libQt5Declarative_devel_CONTENTS="
 	usr/include/qt5/QtDeclarative/
