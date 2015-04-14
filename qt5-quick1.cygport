@@ -2,7 +2,7 @@ inherit qt5-qmake
 
 NAME="qt5-quick1"
 VERSION=5.3.2
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="Qt C++ application framework (QML1 library)"
 DESCRIPTION="Qt is a cross-platform application framework for desktop and
@@ -22,6 +22,7 @@ PKG_NAMES="libQt5Declarative5 libQt5Declarative-devel ${NAME}-tools ${NAME}-exam
 libQt5Declarative5_CONTENTS="
 	usr/bin/cygQt5Declarative-5.dll
 	usr/lib/qt5/imports/Qt/
+	usr/lib/qt5/imports/QtWebKit/
 	usr/lib/qt5/imports/builtins.qmltypes
 	usr/lib/qt5/plugins/qml1tooling/
 	usr/share/doc/
